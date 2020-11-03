@@ -4,12 +4,12 @@ close all;
  
 %% Funcion Objetivo
 
-fun =@(x) sum(x.^4);
+fun =@(x) sum(x.^2);
  
 %% Parametros
  
 % # Individuos en la poblacion
-tam = 2;
+tam = 5;
 % Valores Minimos y Maximos
 vMin= -10;
 vMax= 10;
@@ -19,7 +19,7 @@ numIte = 20;
 AB = -1:1:1;
 
 % Cantidad de dimenciones
-NumVari = 3; 
+NumVari = 2; 
 
 %% LLenar la poblacion original 
  
@@ -35,20 +35,12 @@ MejorValor=zeros(numIte,1);
 for Iteracion=1:numIte
     %CrossOver
     for i=1:tam
-        if(NumVari == 2)
-            if(i == tam)
-             Poblacion = [Poblacion; [Poblacion(i,1)  Poblacion(1,2)]];
-            else
-             Poblacion = [Poblacion; [Poblacion(i,1)  Poblacion(i+1,2)]];
-            end
+        if(i == tam)
+         Poblacion = [Poblacion; [Poblacion(i,1)  Poblacion(1,2)]];
         else
-            if(i == tam)
-             Poblacion = [Poblacion; [Poblacion(i,1)  Poblacion(1,2) Poblacion(1,3)]];
-            else
-             Poblacion = [Poblacion; [Poblacion(i,1)  Poblacion(i+1,2) Poblacion(i+1,3)]];
-            end   
+         Poblacion = [Poblacion; [Poblacion(i,1)  Poblacion(i+1,2)]];
         end
-    end 
+    end     
     %Poblacion es size 2*tam 
     %Seleccion
     %Orden para seleccion competitiva 
@@ -68,10 +60,7 @@ for Iteracion=1:numIte
      for i=1:tam
         Poblacion(i,1) = Poblacion(i,1) + AB(randi(length(AB)));
         Poblacion(i,2) = Poblacion(i,2) + AB(randi(length(AB)));
-        if(NumVari == 3)
-            Poblacion(i,3) = Poblacion(i,3) + AB(randi(length(AB)));
-        end 
-     end
+     end   
      min = intmax('int16');
       for i=1:tam
         if(fun(Poblacion(i,:)) < min)
