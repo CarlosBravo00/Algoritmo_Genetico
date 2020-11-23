@@ -71,13 +71,6 @@ function [ MejorValor, PeorValor, PromedioValor, Sol] = AlogoritmoGenetico(inp)
          PeorValor(Iteracion)= max;
          PromedioValor(Iteracion)= (min + max)/2;
     end
-           
-    plot3(Sol(:,1), Sol(:,2),Sol(:,3));
-    grid on;
-    xlabel('x')
-    ylabel('y')
-    zlabel('Valor')
-    
 end
 
  
