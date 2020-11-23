@@ -1,28 +1,5 @@
-clc;
-clear;
-close all;
-%% Parametros
-% # Individuos en la poblacion
-inp.tam = 3;
-% Valores Minimos y Maximos
-inp.vMin= 100;
-inp.vMax= 200;
-% Numero de Iteraciones
-inp.numIte = 1000;
-% Mutuacion
-inp.TasaMut = .7;
-inp.MinMut = -10;
-inp.MaxMut = 10;
-% Cantidad de dimenciones
-inp.NumVari = 3; 
-% idBfm
-inp.idBfm = 1;
-
-algoritmoGenetico(inp);
-
 %% Algoritmo Genetico
-
-function algoritmoGenetico(inp)
+function [ MejorValor, PeorValor, PromedioValor, Sol] = AlogoritmoGenetico(inp)
 
 	fun =@(x) bfm(inp.idBfm, x);
     
@@ -94,16 +71,7 @@ function algoritmoGenetico(inp)
          PeorValor(Iteracion)= max;
          PromedioValor(Iteracion)= (min + max)/2;
     end
-    
-    hold on; grid on;
-    xlabel('Iteracion'); ylabel('Valores');
-    plot(MejorValor); 
-    plot(PeorValor);
-    plot(PromedioValor);
-    legend('Mejor valor','Peor valor','Valor promedio')
-    hold off;
-    
-    Sol
+           
     plot3(Sol(:,1), Sol(:,2),Sol(:,3));
     grid on;
     xlabel('x')
