@@ -56,11 +56,11 @@ function [ MejorValor, PeorValor, PromedioValor, Sol] = AlogoritmoGenetico(inp)
          Poblacion = NuevaPoblacion;
          min = inf;
          max = -inf;
-         Agen = 0;
+         Agen = [];
           for i=1:inp.tam
+            Agen = [ Agen ; [Poblacion(i,:) fun(Poblacion(i,:))]];  
             if(fun(Poblacion(i,:)) < min)
                 min = fun(Poblacion(i,:));
-                Agen = [Poblacion(i,:) min];
             end
             if(fun(Poblacion(i,:)) > max)
                 max = fun(Poblacion(i,:));
