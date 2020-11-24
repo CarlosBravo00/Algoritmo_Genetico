@@ -1,13 +1,14 @@
 %% Algoritmo Genetico
-function [ MejorValor, PeorValor, PromedioValor, Sol] = AlogoritmoGenetico(inp)
+function [ MejorValor, PeorValor, PromedioValor, PobFinal, Solucion] = AlogoritmoGenetico(inp)
 
 	fun =@(x) bfm(inp.idBfm, x);
     
+    Solucion = [];
+    PobFinal = zeros(inp.tam,0);
     Poblacion = zeros(inp.tam,0);
     MejorValor = zeros(inp.numIte,1);
     PeorValor = zeros(inp.numIte,1);
     PromedioValor = zeros(inp.numIte,1);
-    Sol = [];
 
     for i=1:inp.tam
         Poblacion = [Poblacion;randi([inp.vMin inp.vMax],1,inp.NumVari)];  %#ok<*AGROW>
@@ -57,20 +58,24 @@ function [ MejorValor, PeorValor, PromedioValor, Sol] = AlogoritmoGenetico(inp)
          min = inf;
          max = -inf;
          Agen = [];
+         minAge = [];
           for i=1:inp.tam
             Agen = [ Agen ; [Poblacion(i,:) fun(Poblacion(i,:))]];  
             if(fun(Poblacion(i,:)) < min)
                 min = fun(Poblacion(i,:));
+                minAge = [Poblacion(i,:) fun(Poblacion(i,:))];
             end
             if(fun(Poblacion(i,:)) > max)
                 max = fun(Poblacion(i,:));
             end
           end   
-         Sol = [Sol ; Agen];
+         PobFinal = [PobFinal ; Agen];
          MejorValor(Iteracion)= min;
          PeorValor(Iteracion)= max;
          PromedioValor(Iteracion)= (min + max)/2;
+         Solucion = minAge;
     end
+    Solucion
 end
 
  
